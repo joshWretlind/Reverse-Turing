@@ -1,6 +1,9 @@
 package com.core.db;
 
 import org.neo4j.graphdb.GraphDatabaseService;
+import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.Relationship;
+import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 
 /**
@@ -14,7 +17,7 @@ public class DBWrapper {
 	GraphDatabaseService graphDb;
 	
 	public DBWrapper(){
-		
+		runDB();
 	}
 	
 	public void runDB(){
@@ -41,5 +44,57 @@ public class DBWrapper {
 		graphDb.shutdown();
 	}
 	
-	public void 
+	public Node writeNode(String key, Object value){
+		Transaction tx = graphDb.beginTx();
+		Node n = graphDb.createNode();
+
+		try{
+			n.setProperty(key, value);
+		    tx.success();
+		}
+		finally{
+		    tx.finish();
+		}
+		
+		return n;
+	}
+	
+	public Relationship createRelationship(Node from, Node to, RelationTypes type, String key, Object value){
+		Transaction tx = graphDb.beginTx();
+		Relationship rel = from.createRelationshipTo( to, type.type );
+
+		try{
+			rel.setProperty(key, value);
+		    tx.success();
+		}
+		finally{
+		    tx.finish();
+		}
+		return rel;
+	}
+	
+	public void deleteNode(Node n){
+		Transaction tx = graphDb.beginTx();
+		try{
+			n.delete();
+		    tx.success();
+		}
+		finally{
+		    tx.finish();
+		}
+	}
+	
+	public void deleteRelationship(Relationship rel){
+		Transaction tx = graphDb.beginTx();
+		try{
+			rel.delete();
+		    tx.success();
+		}
+		finally{
+		    tx.finish();
+		}
+	}
+	
+	
+	
 }
