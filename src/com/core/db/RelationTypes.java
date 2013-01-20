@@ -3,9 +3,9 @@ package com.core.db;
 import org.neo4j.graphdb.RelationshipType;
 
 public class RelationTypes {
-	public enum fuckthis{
+	private static enum types implements RelationshipType{
 		KNOWS,IS,CANBE,BEFORE,AFTER;
 	}
 	
-	public RelationshipType type;
+	public types type;
 }
