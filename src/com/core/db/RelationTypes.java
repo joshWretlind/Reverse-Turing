@@ -4,7 +4,7 @@ import org.neo4j.graphdb.RelationshipType;
 
 public class RelationTypes {
 	public static enum types implements RelationshipType{
-		KNOWS,IS,CANBE,BEFORE,AFTER;
+		KNOWS,IS,CAN_BE,BEFORE,AFTER;
 	}
 	
 	public types type;

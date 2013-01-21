@@ -26,7 +26,6 @@ public class DBWrapper {
 	public void runDB(){
 		graphDb = new GraphDatabaseFactory().newEmbeddedDatabase("");
 		registerShutdownHook( graphDb );
-		
 	}
 	
 	private static void registerShutdownHook( final GraphDatabaseService graphDb )
@@ -48,7 +47,17 @@ public class DBWrapper {
 		graphDb.shutdown();
 	}
 	
-	public NodeWrapper writeNode(String key, Object value){
+	public void writeExsistingNode(NodeWrapper n, String key, Object value){
+		Transaction tx = graphDb.beginTx();
+		try{
+			n.set(key, value);
+			tx.success();
+		} finally{
+			tx.finish();
+		}
+	}
+	
+	public NodeWrapper writeNewNode(String key, Object value){
 		Transaction tx = graphDb.beginTx();
 		NodeWrapper n = new NodeWrapper(graphDb);
 
@@ -68,7 +77,17 @@ public class DBWrapper {
 		return n;
 	}
 	
-	public RelationshipWrapper createRelationship(NodeWrapper from, NodeWrapper to, RelationTypes type, String key, Object value){
+	public void writeExsistingRelationship(RelationshipWrapper rel, String key, Object value){
+		Transaction tx = graphDb.beginTx();
+		try{
+			rel.set(key, value);
+			tx.success();
+		} finally {
+			tx.finish();
+		}
+	}
+	
+	public RelationshipWrapper createNewRelationship(NodeWrapper from, NodeWrapper to, RelationTypes type, String key, Object value){
 		Transaction tx = graphDb.beginTx();
 		RelationshipWrapper rel = new RelationshipWrapper(graphDb,to,from,type.type);
 
@@ -107,6 +126,4 @@ public class DBWrapper {
 		    tx.finish();
 		}
 	}
-	
-	
 }

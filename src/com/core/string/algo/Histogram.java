@@ -1,7 +1,7 @@
 package com.core.string.algo;
 
 /**
- * Creates a fequency map for a given collection of strings
+ * Creates a frequency map for a given collection of strings
  */
 import java.util.HashMap;
 import java.util.Map;
@@ -18,9 +18,7 @@ public class Histogram {
 			else{
 				map.put(s.toLowerCase(), map.get(s.toLowerCase())+1);
 			}
-		}
-		
+		}	
 		return map;
-	}
-	
+	}	
 }
