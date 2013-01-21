@@ -5,6 +5,7 @@ import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
+import org.neo4j.graphdb.index.Index;
 
 /**
  * 
@@ -15,6 +16,8 @@ import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 public class DBWrapper {
 	
 	GraphDatabaseService graphDb;
+	Index<Node> nodeIndex = null;
+	Index<Relationship> relationIndex = null;
 	
 	public DBWrapper(){
 		runDB();
@@ -51,6 +54,11 @@ public class DBWrapper {
 
 		try{
 			n.set(key, value);
+			if(nodeIndex == null){
+				nodeIndex = graphDb.index().forNodes("NODE_ID");
+			}
+			
+			nodeIndex.add(n.n, "NODE_ID", n.id);
 		    tx.success();
 		}
 		finally{
@@ -66,6 +74,10 @@ public class DBWrapper {
 
 		try{
 			rel.set(key, value);
+			if(relationIndex == null){
+				relationIndex = graphDb.index().forRelationships("RELATION_ID");
+			}
+			relationIndex.add(rel.rel, "RELATION_ID", rel.id);
 		    tx.success();
 		}
 		finally{
