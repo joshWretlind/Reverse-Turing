@@ -3,16 +3,16 @@ package com.core.db;
  * Josh Wretlind
  * Handles the database as a singleton
  */
-public class DBSingleton {
+public class DBSingleton{
 
-	DBSingleton dbs = null;
+	static DBSingleton dbs = null;
 	DBWrapper dbo = null;
 	
 	private DBSingleton(){
 		dbo = new DBWrapper();
 	}
 	
-	public DBWrapper getInstance(){
+	public static DBWrapper getInstance(){
 		if(dbs == null){
 			dbs = new DBSingleton();
 			return dbs.dbo;

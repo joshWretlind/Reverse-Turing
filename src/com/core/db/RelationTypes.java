@@ -8,4 +8,8 @@ public class RelationTypes {
 	}
 	
 	public types type;
+	
+	public RelationTypes(){
+		type = types.KNOWS;
+	}
 }

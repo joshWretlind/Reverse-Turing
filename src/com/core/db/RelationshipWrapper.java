@@ -9,7 +9,7 @@ public class RelationshipWrapper {
 	Relationship rel;
 	
 	public RelationshipWrapper(GraphDatabaseService graphdb, NodeWrapper to, NodeWrapper from, RelationTypes.types type){
-		id = RandomStringUtils.random(64);
+		id = RandomStringUtils.randomAlphanumeric(64);
 		rel = from.n.createRelationshipTo(to.n, type);
 		rel.setProperty("RELATION_ID", id);
 	}

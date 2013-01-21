@@ -8,7 +8,7 @@ public class NodeWrapper {
 	Node n;
 	String id;
 	public NodeWrapper(GraphDatabaseService graphdb){
-		id = RandomStringUtils.random(64);
+		id = RandomStringUtils.randomAlphanumeric(64);
 		n = graphdb.createNode();
 		set("NODE_ID", id);
 	}

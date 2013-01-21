@@ -13,7 +13,7 @@ import org.neo4j.graphdb.index.Index;
  * Wraps the Neo4j database
  *
  */
-public class DBWrapper {
+public class DBWrapper implements Runnable {
 	
 	GraphDatabaseService graphDb;
 	Index<Node> nodeIndex = null;
@@ -124,6 +124,11 @@ public class DBWrapper {
 		}
 		finally{
 		    tx.finish();
+		}
+	}
+
+	public void run() {
+		while(true){
 		}
 	}
 }

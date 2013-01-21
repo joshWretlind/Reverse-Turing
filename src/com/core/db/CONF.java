@@ -5,5 +5,5 @@ package com.core.db;
  *
  */
 public class CONF {
-	public static final String DB_LOC = "neo4j-enterprise-1.8.1";
+	public static final String DB_LOC = "bir";
 }
