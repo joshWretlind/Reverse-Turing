@@ -24,7 +24,7 @@ public class DBWrapper {
 	}
 	
 	public void runDB(){
-		graphDb = new GraphDatabaseFactory().newEmbeddedDatabase("");
+		graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(CONF.DB_LOC);
 		registerShutdownHook( graphDb );
 	}
 	
