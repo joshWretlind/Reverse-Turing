@@ -1,7 +1,7 @@
 package com.main;
 /**
  * Main entry point for this program.
- * @author bobwrit
+ * @author Josh Wretlind
  *
  */
 public class control {
